@@ -3,6 +3,7 @@ from settings import *
 from tile import Tile
 from player import Player
 from importer import import_csv, import_tiles
+from interactions import InteractGroup
 
 
 class Level:
@@ -12,56 +13,55 @@ class Level:
         self.visible = CameraGroup()
         self.background = CameraGroup()
         self.obstacles = pygame.sprite.Group()
+        self.interactable = InteractGroup()
         self.player = None
+        self.level = 'laborotory'
 
         self.create_map()
 
     def create_map(self):
         csvs = {
             'laborotory': {
-                # 'obstacles': import_csv('../maps/lab/lab_map_obstacles.csv'),
                 'furniture': import_csv('../maps/lab/lab_map_furniture.csv'),
-                # 'go_button': import_csv('../maps/lab/lab_map_go.csv'),
-                # 'player_location': import_csv('../maps/lab/lab_map_player.csv'),
-                # 'lab_stuff': import_csv('../maps/lab/lab_map_stuff.csv'),
-                'lab': import_csv('../maps/lab/lab_map.csv')
+                'lab': import_csv('../maps/lab/lab_map.csv'),
+                'interactions': import_csv('../maps/lab/lab_interactions.csv')
             },
         }
         tiles = {
             'laborotory': import_tiles("../tiles/lab_tiles")
         }
 
-        for csv_type, csv_item in csvs['laborotory'].items():
+        for csv_type, csv_item in csvs[self.level].items():
             for row_i, row in enumerate(csv_item):
                 for col_i, col in enumerate(row):
                     if col != '-1':
                         x = col_i * TILESIZE
                         y = row_i * TILESIZE
-                        # if csv_type == 'obstacles':
-                        #     Tile((x, y), [self.obstacles], 'obstacle')
                         if csv_type == 'furniture':
                             try:
-                                # print(tiles['laborotory'])
                                 image = tiles['laborotory'][col + '.png']
                                 Tile((x, y), (self.obstacles, self.visible), 'object', image)
                             except KeyError:
-                                # print(col + '.png')
                                 continue
                         if csv_type == 'lab':
                             try:
                                 image = tiles['laborotory'][col + '.png']
-                                if col == '118' or col == '119' or col == '120' or col == '129' or col == '130' or col == '131':
-                                    Tile((x, y), (self.background,), 'object', image)
+                                if col == '118' or col == '119' or col == '120' or \
+                                        col == '129' or col == '130' or col == '131':
+                                    Tile((x, y), self.background, 'object', image)
                                 else:
                                     Tile((x, y), (self.obstacles, self.background,), 'object', image)
                             except KeyError:
                                 continue
+                        if csv_type == 'interactions':
+                            Tile((x, y), self.interactable, 'interactable'+col)
         self.player = Player((280, 328), self.visible, self.obstacles)
 
     def run(self):
         self.background.running_draw(self.player)
         self.visible.running_draw(self.player)
         self.visible.update()
+        self.interactable.possible_interactions(self.player, self)
 
 
 class CameraGroup(pygame.sprite.Group):
@@ -76,7 +76,7 @@ class CameraGroup(pygame.sprite.Group):
         self.offset.x = player.rect.centerx - self.half_width
         self.offset.y = player.rect.centery - self.half_height
 
-        for sprite in sorted(self.sprites(), key=lambda sprite: sprite.rect.centery):
+        for sprite in sorted(self.sprites(), key=lambda tile: tile.rect.centery):
             offset_pos = sprite.rect.topleft - self.offset
             self.display.blit(sprite.image, offset_pos)
 
