@@ -18,7 +18,6 @@ class InteractGroup(pygame.sprite.Group):
                 # interaction message
                 interact = font.render('press x to interact', True, 'White')
                 interact_rect = self.display.get_rect(topleft=(580, 680))
-                pygame.draw.rect(self.display, 'Black', interact_rect)
                 self.display.blit(interact, interact_rect)
 
                 # check for keyboard_input
@@ -28,4 +27,3 @@ class InteractGroup(pygame.sprite.Group):
                     if sprite.type == 'interactable10':
                         level.level = LEVEL_NAME[LEVEL]
                         level.create_map()
-                        print('10//')
