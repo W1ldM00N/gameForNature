@@ -38,7 +38,7 @@ class Level:
                 'water': import_csv('../maps/forest/forest_map_water.csv'),
                 'fire': import_csv('../maps/forest/forest_map_fire.csv'),
                 'interactions': import_csv('../maps/forest/forest_map_intaeractable.csv'),
-                'trees': import_csv('../maps/forest/forest_map_trees.csv'),
+                'tree': import_csv('../maps/forest/forest_map_trees.csv'),
                 'pine_tree': import_csv('../maps/forest/forest_map_pine trees.csv')
             },
         }

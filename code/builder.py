@@ -42,6 +42,12 @@ def forest_builder(csvs, tiles, obstacles, visible, interactable):
                             Tile((x, y), (visible, obstacles), 'object', image)
                         except KeyError:
                             continue
+                    if csv_type == 'tree':
+                        try:
+                            image = tiles['forest']['tree' + col + '.png']
+                            Tile((x, y), (visible, obstacles), 'object', image)
+                        except KeyError:
+                            continue
                     if csv_type == 'water':
                         try:
                             image = tiles['forest'][col + '.png']
