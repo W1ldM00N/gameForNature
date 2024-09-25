@@ -2,6 +2,7 @@ import pygame
 import sys
 from settings import *
 from level import Level
+from importer import json_dump
 
 
 class Game:
@@ -18,6 +19,8 @@ class Game:
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    self.level.save["level"] = 0
+                    json_dump(SAVE_PATH, self.level.save)
                     pygame.quit()
                     sys.exit()
 
@@ -29,4 +32,8 @@ class Game:
 
 if __name__ == '__main__':
     game = Game()
-    game.run()
+    try:
+        game.run()
+    except KeyboardInterrupt:
+        pygame.quit()
+        sys.exit()

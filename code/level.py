@@ -1,8 +1,9 @@
 import pygame
 from player import Player
-from importer import import_csv, import_tiles
+from importer import import_csv, import_tiles, import_json
 from interactions import InteractGroup
 from builder import *
+from tasks import Task
 
 font = pygame.font.Font(None, 30)
 
@@ -17,7 +18,9 @@ class Level:
         self.background = CameraGroup(level=self.level)
         self.obstacles = pygame.sprite.Group()
         self.interactable = InteractGroup()
+        self.tasks = Task(self)
         self.player = None
+        self.save = import_json(SAVE_PATH)
 
         self.create_map()
 
@@ -37,9 +40,10 @@ class Level:
             'forest': {
                 'water': import_csv('../maps/forest/forest_map_water.csv'),
                 'fire': import_csv('../maps/forest/forest_map_fire.csv'),
-                'interactions': import_csv('../maps/forest/forest_map_intaeractable.csv'),
                 'tree': import_csv('../maps/forest/forest_map_trees.csv'),
-                'pine_tree': import_csv('../maps/forest/forest_map_pine trees.csv')
+                'pine_tree': import_csv('../maps/forest/forest_map_pine trees.csv'),
+                'red_book_1': import_csv('../maps/forest/forest_map_Trollius asiaticus.csv'),
+                'red_book_2': import_csv('../maps/forest/forest_map_Rhodiola rosea.csv')
             },
         }
         tiles = {
@@ -51,6 +55,7 @@ class Level:
             lab_builder(csvs, tiles, self.obstacles, self.visible, self.background, self.interactable)
             self.player = Player((280, 328), self.visible, self.obstacles)
         elif self.level == 'forest':
+            self.save["level"] += 1
             forest_builder(csvs, tiles, self.obstacles, self.visible, self.interactable)
             self.player = Player((280, 750), self.visible, self.obstacles)
 
@@ -59,6 +64,8 @@ class Level:
         self.visible.running_draw(self.player)
         self.visible.update()
         self.interactable.possible_interactions(self.player, self)
+        self.tasks.update()
+        self.tasks.display_task()
 
 
 class CameraGroup(pygame.sprite.Group):

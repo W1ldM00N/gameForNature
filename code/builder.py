@@ -54,8 +54,19 @@ def forest_builder(csvs, tiles, obstacles, visible, interactable):
                             Tile((x, y), (visible, obstacles), 'object', image)
                         except KeyError:
                             continue
-                    if csv_type == 'interactions':
-                        Tile((x, y), interactable, 'interactable' + col)
-
                     if csv_type == 'fire':
                         Tile((x, y), interactable, 'fire')
+                    if csv_type == 'red_book_1':
+                        try:
+                            image = tiles['forest']['9.png']
+                            Tile((x, y), (visible, obstacles), 'object', image)
+                            Tile((x, y), interactable, 'Trollius asiaticus')
+                        except KeyError:
+                            continue
+                    if csv_type == 'red_book_2':
+                        try:
+                            image = tiles['forest']['8.png']
+                            Tile((x, y), (visible, obstacles), 'object', image)
+                            Tile((x, y), interactable, 'Rhodiola rosea')
+                        except KeyError:
+                            continue

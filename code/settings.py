@@ -9,6 +9,4 @@ LEVEL_NAME = [
     'mountain',
     'sea'
 ]
-
-# current level
-LEVEL = 1
+SAVE_PATH = "../saves/save.json"
