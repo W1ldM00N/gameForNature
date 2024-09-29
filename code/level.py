@@ -51,10 +51,10 @@ class Level:
             'forest': import_tiles('../tiles/forest_tiles')
         }
 
-        if self.level == 'laborotory':
+        if self.level == 'laborotory' and not IS_TASKED:
             lab_builder(csvs, tiles, self.obstacles, self.visible, self.background, self.interactable)
             self.player = Player((280, 328), self.visible, self.obstacles)
-        elif self.level == 'forest':
+        elif self.level == 'forest' and not IS_TASKED:
             self.save["level"] += 1
             forest_builder(csvs, tiles, self.obstacles, self.visible, self.interactable)
             self.player = Player((280, 750), self.visible, self.obstacles)

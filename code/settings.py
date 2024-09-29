@@ -10,3 +10,4 @@ LEVEL_NAME = [
     'sea'
 ]
 SAVE_PATH = "../saves/save.json"
+IS_TASKED = False
