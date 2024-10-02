@@ -63,6 +63,7 @@ class Level:
         self.background.running_draw(self.player)
         self.visible.running_draw(self.player)
         self.visible.update()
+        self.interactable.running_draw(self.player)
         self.interactable.possible_interactions(self.player, self)
         self.tasks.update()
         self.tasks.display_task()

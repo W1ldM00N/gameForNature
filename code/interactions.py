@@ -10,21 +10,29 @@ distance = {
     'interactable10': 1.5,
     'Rhodiola rosea': 1.5,
     'Trollius asiaticus': 1.5,
-    'fire': 0,
+    'fire visible': 3,
+    'fire invisible': 0,
+    'water': 1,
 }
 
 taskStuffInteracted = {
     "interactable10": False,
-    "fire": False,
+    "fire visible": False,
     "Trollius asiaticus": False,
     "Rhodiola rosea": False,
+    "water": False
 }
+
+fireCount = 1
 
 
 class InteractGroup(pygame.sprite.Group):
     def __init__(self):
         super().__init__()
         self.display = pygame.display.get_surface()
+        self.half_width = self.display.get_width() // 2
+        self.half_height = self.display.get_height() // 2
+        self.offset = pygame.math.Vector2()
 
     def possible_interactions(self, player, level):
         save = import_json(settings.SAVE_PATH)
@@ -76,3 +84,34 @@ class InteractGroup(pygame.sprite.Group):
                         if taskStuffInteracted["Trollius asiaticus"] and \
                                 taskStuffInteracted["Rhodiola rosea"]:
                             level.tasks.complete()
+                    elif sprite.type == "water":
+                        player.hasWater = True
+                        interact = font.render('You took water', True, 'White')
+                        interact_rect = self.display.get_rect(topleft=(595, 640))
+                        self.display.blit(interact, interact_rect)
+                    elif sprite.type == "fire visible":
+                        if not player.hasWater:
+                            interact = font.render('You have no water', True, 'White')
+                            interact_rect = self.display.get_rect(topleft=(580, 640))
+                            self.display.blit(interact, interact_rect)
+                        else:
+                            sprite.type = 'fire invisible'
+                            player.hasWater = False
+                            global fireCount
+                            if fireCount - 1 == 0:
+                                taskStuffInteracted['fire visible'] = False
+                                level.tasks.complete()
+                            else:
+                                fireCount -= 1
+
+    def running_draw(self, player):
+        self.offset.x = player.rect.centerx - self.half_width
+        self.offset.y = player.rect.centery - self.half_height
+
+        for sprite in sorted(self.sprites(), key=lambda tile: tile.rect.centery):
+            try:
+                if sprite.type.split(" ")[1] == "visible":
+                    offset_pos = sprite.rect.topleft - self.offset
+                    self.display.blit(sprite.image, offset_pos)
+            except IndexError:
+                continue

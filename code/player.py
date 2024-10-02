@@ -5,6 +5,8 @@ from importer import import_tiles
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, group, obstacles):
         super().__init__(group)
+        self.type = 'player'
+        self.hasWater = False
         # hitbox setup
         self.image = pygame.image.load("../tiles/character/down/1.png").convert_alpha()
         self.rect = self.image.get_rect(topleft=pos)
@@ -24,11 +26,11 @@ class Player(pygame.sprite.Sprite):
         self.import_player_images()
         self.status = 'down'
         self.frame = 1
-        self.frame_speed = 0.1
+        self.frame_speed = 0.2
 
         # movement setup
         self.dir = pygame.math.Vector2()
-        self.vel = 3
+        self.vel = 5
 
         # collision setup
         self.obstacles = obstacles
