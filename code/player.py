@@ -26,7 +26,7 @@ class Player(pygame.sprite.Sprite):
         self.import_player_images()
         self.status = 'down'
         self.frame = 1
-        self.frame_speed = 0.2
+        self.frame_speed = 0.1
 
         # movement setup
         self.dir = pygame.math.Vector2()

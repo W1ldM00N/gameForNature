@@ -11,3 +11,7 @@ LEVEL_NAME = [
 ]
 SAVE_PATH = "../saves/save.json"
 IS_TASKED = False
+LEVEL_SUM = {
+    'laborotory': None,
+    'forest': 3,
+}

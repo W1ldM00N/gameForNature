@@ -18,12 +18,13 @@ distance = {
 taskStuffInteracted = {
     "interactable10": False,
     "fire visible": False,
+    "fire invisible": True,
     "Trollius asiaticus": False,
     "Rhodiola rosea": False,
     "water": False
 }
 
-fireCount = 1
+fireCount = 5 - 4
 
 
 class InteractGroup(pygame.sprite.Group):
