@@ -64,9 +64,12 @@ class Task:
             self.level_class.save['last_level'] += 1
             json_dump(SAVE_PATH, self.level_class.save)
             self.level_class.level = LEVEL_NAME[0]
+            self.level = self.level_class.level
+            self.task_num = 0
             self.level_class.create_map()
-        if self.level == 'forest' and self.task_list[self.level][self.task_num] == 'Warning! Stop the fire!':
-            for sprite in sorted(self.level_class.interactable.sprites(), key=lambda tile: tile.rect.centery):
-                if sprite.type == 'fire invisible':
-                    sprite.image = pygame.image.load("../tiles/forest_tiles/fire.png")
-                    sprite.type = 'fire visible'
+        if self.level == 'forest':
+            if self.task_list[self.level][self.task_num] == 'Warning! Stop the fire!':
+                for sprite in sorted(self.level_class.interactable.sprites(), key=lambda tile: tile.rect.centery):
+                    if sprite.type == 'fire invisible':
+                        sprite.image = pygame.image.load("../tiles/forest_tiles/fire.png")
+                        sprite.type = 'fire visible'
