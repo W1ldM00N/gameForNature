@@ -45,6 +45,13 @@ class Level:
                 'red_book_1': import_csv('../maps/forest/forest_map_Trollius asiaticus.csv'),
                 'red_book_2': import_csv('../maps/forest/forest_map_Rhodiola rosea.csv')
             },
+            'mountain': {
+                'apple_tree': import_csv('../maps/mountain/mountain_map_apple_tree.csv'),
+                'borders': import_csv('../maps/mountain/mountain_map_borders.csv'),
+                'tree': import_csv('../maps/mountain/mountain_map_tree.csv'),
+                'pine_tree': import_csv('../maps/mountain/mountain_map_pine_tree.csv'),
+                'red_book': import_csv('../maps/mountain/mountain_map_red book.csv'),
+            },
         }
         tiles = {
             'laborotory': import_tiles("../tiles/lab_tiles"),
@@ -57,6 +64,9 @@ class Level:
         elif self.save['last_level'] == 1 and not IS_TASKED:
             forest_builder(csvs, tiles, self.obstacles, self.visible, self.interactable)
             self.player = Player((280, 750), self.visible, self.obstacles)
+        elif self.save['last_level'] == 2 and not IS_TASKED:
+            mountain_builder(csvs, self.obstacles, self.visible, self.interactable)
+            self.player = Player((1750, 1500), self.visible, self.obstacles)
 
     def run(self):
         self.background.running_draw(self.player)
@@ -81,6 +91,9 @@ class CameraGroup(pygame.sprite.Group):
         if level == 'forest':
             self.floor_surf = pygame.image.load('../tiles/forest_tiles/background.png').convert()
             self.floor_rect = self.floor_surf.get_rect(topleft=(0, 0))
+        if level == 'mountain':
+            self.floor_surf = pygame.image.load('../tiles/mountain_tiles/mountain_map.png').convert()
+            self.floor_rect = self.floor_surf.get_rect(topleft=(0, 0))
 
     def running_draw(self, player):
         self.offset.x = player.rect.centerx - self.half_width
@@ -99,4 +112,7 @@ class CameraGroup(pygame.sprite.Group):
 
         if level == 'forest':
             self.floor_surf = pygame.image.load('../tiles/forest_tiles/background.png').convert()
+            self.floor_rect = self.floor_surf.get_rect(topleft=(0, 0))
+        if level == 'mountain':
+            self.floor_surf = pygame.image.load('../tiles/mountain_tiles/mountain_map.png').convert()
             self.floor_rect = self.floor_surf.get_rect(topleft=(0, 0))

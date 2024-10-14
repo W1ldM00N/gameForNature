@@ -13,6 +13,8 @@ distance = {
     'fire visible': 3,
     'fire invisible': 0,
     'water': 1,
+    'apple': 1.5,
+    'flower': 1.5
 }
 
 taskStuffInteracted = {
@@ -21,7 +23,9 @@ taskStuffInteracted = {
     "fire invisible": True,
     "Trollius asiaticus": False,
     "Rhodiola rosea": False,
-    "water": False
+    "water": False,
+    'apple': False,
+    'flower': False
 }
 
 fireCount = 5 - 4

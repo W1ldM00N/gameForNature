@@ -13,6 +13,9 @@ task = {
         'Find endangered plants',
         'Warning! Stop the fire!'
     ],
+    'mountain': [
+        'Find endangered plants',
+    ]
 }
 
 
