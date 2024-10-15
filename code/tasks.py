@@ -7,14 +7,37 @@ font = pygame.font.Font(None, 30)
 
 task = {
     'laborotory': [
-        'Leave the lab'
+        'Покиньте лабороторию'
     ],
     'forest': [
-        'Find endangered plants',
-        'Warning! Stop the fire!'
+        'Найдите исчезающие виды растений',
+        'Опасно! Потушите лесной пожар!'
     ],
     'mountain': [
-        'Find endangered plants',
+        'Найдите исчезающие виды растений',
+        'Заполните форму по защите комплекса'
+    ]
+}
+
+quiz_len = {
+    'mountain': 1,
+}
+
+quiz_question = {
+    'mountain': [
+        'Какой из перечисленных видов растений обитает в этом заповеднике?',
+    ]
+}
+
+quiz_answers = {
+    'mountain': [
+        [
+            '[1] Яблоня Сиверса',
+            '[2] Родиола розовая',
+            '[3] Ирис желтый',
+            '[4] Ель',
+            1
+        ],
     ]
 }
 
@@ -71,8 +94,66 @@ class Task:
             self.task_num = 0
             self.level_class.create_map()
         if self.level == 'forest':
-            if self.task_list[self.level][self.task_num] == 'Warning! Stop the fire!':
+            if self.task_list[self.level][self.task_num] == 'Опасно! Потушите лесной пожар!':
                 for sprite in sorted(self.level_class.interactable.sprites(), key=lambda tile: tile.rect.centery):
                     if sprite.type == 'fire invisible':
                         sprite.image = pygame.image.load("../tiles/forest_tiles/fire.png")
                         sprite.type = 'fire visible'
+        if self.task_list[self.level][self.task_num] == 'Заполните форму по защите комплекса':
+            self.quiz_maker(self.level)
+
+    def quiz_maker(self, level):
+        for i in range(quiz_len[level]):
+            while True:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        sys.exit()
+
+                keys = pygame.key.get_pressed()
+                if keys[pygame.K_1]:
+                    if quiz_answers[level][i][4] == 1:
+                        ans = font.render('Congrats!', True, 'White')
+                    else:
+                        ans = font.render('Wrong!', True, 'White')
+                    self.display.blit(ans, (650, 150))
+                    pygame.display.update()
+                    break
+                elif keys[pygame.K_2]:
+                    if quiz_answers[level][i][4] == 2:
+                        ans = font.render('Congrats!', True, 'White')
+                    else:
+                        ans = font.render('Wrong!', True, 'White')
+                    self.display.blit(ans, (650, 150))
+                    pygame.display.update()
+                    break
+                elif keys[pygame.K_3]:
+                    if quiz_answers[level][i][4] == 3:
+                        ans = font.render('Congrats!', True, 'White')
+                    else:
+                        ans = font.render('Wrong!', True, 'White')
+                    self.display.blit(ans, (650, 150))
+                    pygame.display.update()
+                    break
+                elif keys[pygame.K_4]:
+                    if quiz_answers[level][i][4] == 4:
+                        ans = font.render('Congrats!', True, 'White')
+                    else:
+                        ans = font.render('Wrong!', True, 'White')
+                    self.display.blit(ans, (650, 150))
+                    pygame.display.update()
+                    break
+
+                self.display.fill('black')
+                question = font.render(quiz_question[level][i], True, 'White')
+                self.display.blit(question, (15, 30))
+                first_ans = font.render(quiz_answers[level][i][0], True, 'White')
+                self.display.blit(first_ans, (30, 200))
+                second_ans = font.render(quiz_answers[level][i][1], True, 'White')
+                self.display.blit(second_ans, (30, 300))
+                third_ans = font.render(quiz_answers[level][i][2], True, 'White')
+                self.display.blit(third_ans, (530, 200))
+                forth_ans = font.render(quiz_answers[level][i][3], True, 'White')
+                self.display.blit(forth_ans, (530, 300))
+                pygame.display.update()
+        self.complete()
