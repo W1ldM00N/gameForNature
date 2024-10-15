@@ -59,7 +59,9 @@ class InteractGroup(pygame.sprite.Group):
                         level.level = settings.LEVEL_NAME[save["last_level"]]
                         level.create_map()
                     elif sprite.type == "Trollius asiaticus" or \
-                            sprite.type == "Rhodiola rosea":
+                            sprite.type == "Rhodiola rosea" or \
+                            sprite.type == "apple" or \
+                            sprite.type == "flower":
                         if not taskStuffInteracted[sprite.type]:
                             taskStuffInteracted[sprite.type] = True
 
@@ -89,6 +91,10 @@ class InteractGroup(pygame.sprite.Group):
                         if taskStuffInteracted["Trollius asiaticus"] and \
                                 taskStuffInteracted["Rhodiola rosea"]:
                             level.tasks.complete()
+                        if taskStuffInteracted["apple"] and \
+                                taskStuffInteracted["flower"]:
+                            level.tasks.complete()
+
                     elif sprite.type == "water":
                         player.hasWater = True
                         interact = font.render('You took water', True, 'White')
