@@ -14,4 +14,5 @@ IS_TASKED = False
 LEVEL_SUM = {
     'laborotory': None,
     'forest': 3,
+    'mountain': 3
 }

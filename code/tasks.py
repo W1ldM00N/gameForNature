@@ -15,7 +15,7 @@ task = {
     ],
     'mountain': [
         'Найдите исчезающие виды растений',
-        'Заполните форму по защите комплекса'
+        'Заполните форму по заповеднику'
     ]
 }
 
@@ -99,7 +99,7 @@ class Task:
                     if sprite.type == 'fire invisible':
                         sprite.image = pygame.image.load("../tiles/forest_tiles/fire.png")
                         sprite.type = 'fire visible'
-        if self.task_list[self.level][self.task_num] == 'Заполните форму по защите комплекса':
+        if self.task_list[self.level][self.task_num] == 'Заполните форму по заповеднику':
             self.quiz_maker(self.level)
 
     def quiz_maker(self, level):
