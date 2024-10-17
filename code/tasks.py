@@ -4,6 +4,7 @@ from settings import *
 from importer import json_dump
 
 font = pygame.font.Font(None, 30)
+quiz_font = pygame.font.Font(None, 50)
 
 task = {
     'laborotory': [
@@ -113,47 +114,47 @@ class Task:
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_1]:
                     if quiz_answers[level][i][4] == 1:
-                        ans = font.render('Congrats!', True, 'White')
+                        ans = quiz_font.render('Congrats!', True, 'White')
                     else:
-                        ans = font.render('Wrong!', True, 'White')
+                        ans = quiz_font.render('Wrong!', True, 'White')
                     self.display.blit(ans, (650, 150))
                     pygame.display.update()
                     break
                 elif keys[pygame.K_2]:
                     if quiz_answers[level][i][4] == 2:
-                        ans = font.render('Congrats!', True, 'White')
+                        ans = quiz_font.render('Congrats!', True, 'White')
                     else:
-                        ans = font.render('Wrong!', True, 'White')
+                        ans = quiz_font.render('Wrong!', True, 'White')
                     self.display.blit(ans, (650, 150))
                     pygame.display.update()
                     break
                 elif keys[pygame.K_3]:
                     if quiz_answers[level][i][4] == 3:
-                        ans = font.render('Congrats!', True, 'White')
+                        ans = quiz_font.render('Congrats!', True, 'White')
                     else:
-                        ans = font.render('Wrong!', True, 'White')
+                        ans = quiz_font.render('Wrong!', True, 'White')
                     self.display.blit(ans, (650, 150))
                     pygame.display.update()
                     break
                 elif keys[pygame.K_4]:
                     if quiz_answers[level][i][4] == 4:
-                        ans = font.render('Congrats!', True, 'White')
+                        ans = quiz_font.render('Congrats!', True, 'White')
                     else:
-                        ans = font.render('Wrong!', True, 'White')
+                        ans = quiz_font.render('Wrong!', True, 'White')
                     self.display.blit(ans, (650, 150))
                     pygame.display.update()
                     break
 
                 self.display.fill('black')
-                question = font.render(quiz_question[level][i], True, 'White')
+                question = quiz_font.render(quiz_question[level][i], True, 'White')
                 self.display.blit(question, (15, 30))
-                first_ans = font.render(quiz_answers[level][i][0], True, 'White')
+                first_ans = quiz_font.render(quiz_answers[level][i][0], True, 'White')
                 self.display.blit(first_ans, (30, 200))
-                second_ans = font.render(quiz_answers[level][i][1], True, 'White')
+                second_ans = quiz_font.render(quiz_answers[level][i][1], True, 'White')
                 self.display.blit(second_ans, (30, 300))
-                third_ans = font.render(quiz_answers[level][i][2], True, 'White')
+                third_ans = quiz_font.render(quiz_answers[level][i][2], True, 'White')
                 self.display.blit(third_ans, (530, 200))
-                forth_ans = font.render(quiz_answers[level][i][3], True, 'White')
+                forth_ans = quiz_font.render(quiz_answers[level][i][3], True, 'White')
                 self.display.blit(forth_ans, (530, 300))
                 pygame.display.update()
         self.complete()
