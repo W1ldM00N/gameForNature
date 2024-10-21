@@ -73,7 +73,7 @@ def forest_builder(csvs, tiles, obstacles, visible, interactable):
                             continue
 
 
-def mountain_builder(csvs, obstacles, visible, interactable):
+def mountain_builder(csvs, obstacles, interactable):
     for csv_type, csv_item in csvs['mountain'].items():
         for row_i, row in enumerate(csv_item):
             for col_i, col in enumerate(row):
@@ -81,29 +81,31 @@ def mountain_builder(csvs, obstacles, visible, interactable):
                     x = col_i * TILESIZE
                     y = row_i * TILESIZE
                     if csv_type == 'pine_tree':
-                        try:
-                            Tile((x, y), obstacles, 'object')
-                        except KeyError:
-                            continue
+                        Tile((x, y), obstacles, 'object')
                     if csv_type == 'tree':
-                        try:
-                            Tile((x, y), obstacles, 'object')
-                        except KeyError:
-                            continue
+                        Tile((x, y), obstacles, 'object')
                     if csv_type == 'red_book':
-                        try:
-                            Tile((x, y), obstacles, 'object')
-                            Tile((x, y), interactable, 'flower')
-                        except KeyError:
-                            continue
+                        Tile((x, y), obstacles, 'object')
+                        Tile((x, y), interactable, 'flower')
                     if csv_type == 'apple_tree':
-                        try:
-                            Tile((x, y), obstacles, 'object')
-                            Tile((x, y), interactable, 'apple')
-                        except KeyError:
-                            continue
+                        Tile((x, y), obstacles, 'object')
+                        Tile((x, y), interactable, 'apple')
                     if csv_type == 'borders':
-                        try:
-                            Tile((x, y), obstacles, 'object')
-                        except KeyError:
-                            continue
+                        Tile((x, y), obstacles, 'object')
+
+
+def sea_builder(csvs, obstacles, interactable):
+    for csv_type, csv_item in csvs['sea'].items():
+        for row_i, row in enumerate(csv_item):
+            for col_i, col in enumerate(row):
+                if col != '-1':
+                    x = col_i * TILESIZE
+                    y = row_i * TILESIZE
+                    if csv_type == 'asdf':
+                        Tile((x, y), obstacles, 'object')
+                        Tile((x, y), interactable, 'asdf')
+                    if csv_type == 'qwert6':
+                        Tile((x, y), obstacles, 'object')
+                        Tile((x, y), interactable, 'qwert6')
+                    if csv_type == 'borders':
+                        Tile((x, y), obstacles, 'object')

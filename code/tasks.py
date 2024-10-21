@@ -17,6 +17,9 @@ task = {
     'mountain': [
         'Найдите исчезающие виды растений',
         'Заполните форму по заповеднику'
+    ],
+    'sea': [
+        'Найдите исчезающие виды растений',
     ]
 }
 
@@ -119,6 +122,7 @@ class Task:
                         ans = quiz_font.render('Wrong!', True, 'White')
                     self.display.blit(ans, (650, 150))
                     pygame.display.update()
+                    pygame.time.wait(2000)
                     break
                 elif keys[pygame.K_2]:
                     if quiz_answers[level][i][4] == 2:
@@ -127,6 +131,7 @@ class Task:
                         ans = quiz_font.render('Wrong!', True, 'White')
                     self.display.blit(ans, (650, 150))
                     pygame.display.update()
+                    pygame.time.wait(2000)
                     break
                 elif keys[pygame.K_3]:
                     if quiz_answers[level][i][4] == 3:
@@ -135,6 +140,7 @@ class Task:
                         ans = quiz_font.render('Wrong!', True, 'White')
                     self.display.blit(ans, (650, 150))
                     pygame.display.update()
+                    pygame.time.wait(2000)
                     break
                 elif keys[pygame.K_4]:
                     if quiz_answers[level][i][4] == 4:
@@ -143,6 +149,7 @@ class Task:
                         ans = quiz_font.render('Wrong!', True, 'White')
                     self.display.blit(ans, (650, 150))
                     pygame.display.update()
+                    pygame.time.wait(2000)
                     break
 
                 self.display.fill('black')

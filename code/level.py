@@ -52,6 +52,11 @@ class Level:
                 'pine_tree': import_csv('../maps/mountain/mountain_map_pine_tree.csv'),
                 'red_book': import_csv('../maps/mountain/mountain_map_red book.csv'),
             },
+            'sea': {
+                'asdf': import_csv('../maps/sea/sea_asdf.csv'),
+                'qwert6': import_csv('../maps/sea/sea_qwert6.csv'),
+                'borders': import_csv('../maps/sea/sea_borders.csv')
+            }
         }
         tiles = {
             'laborotory': import_tiles("../tiles/lab_tiles"),
@@ -65,8 +70,11 @@ class Level:
             forest_builder(csvs, tiles, self.obstacles, self.visible, self.interactable)
             self.player = Player((280, 750), self.visible, self.obstacles)
         elif self.save['last_level'] == 2 and not IS_TASKED:
-            mountain_builder(csvs, self.obstacles, self.visible, self.interactable)
+            mountain_builder(csvs, self.obstacles, self.interactable)
             self.player = Player((1750, 1500), self.visible, self.obstacles)
+        elif self.save['last_level'] == 3 and not IS_TASKED:
+            sea_builder(csvs, self.obstacles, self.interactable)
+            self.player = Player((1750, 1750), self.visible, self.obstacles)
 
     def run(self):
         self.background.running_draw(self.player)
@@ -113,6 +121,9 @@ class CameraGroup(pygame.sprite.Group):
         if level == 'forest':
             self.floor_surf = pygame.image.load('../tiles/forest_tiles/background.png').convert()
             self.floor_rect = self.floor_surf.get_rect(topleft=(0, 0))
-        if level == 'mountain':
+        elif level == 'mountain':
             self.floor_surf = pygame.image.load('../tiles/mountain_tiles/mountain_map.png').convert()
+            self.floor_rect = self.floor_surf.get_rect(topleft=(0, 0))
+        elif level == 'sea':
+            self.floor_surf = pygame.image.load('../tiles/sea_tiles/sea.png').convert()
             self.floor_rect = self.floor_surf.get_rect(topleft=(0, 0))
