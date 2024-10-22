@@ -4,6 +4,8 @@ import settings
 from level import Level
 from importer import json_dump
 
+font = pygame.font.Font(None, 100)
+
 
 class Game:
     def __init__(self):
@@ -24,6 +26,14 @@ class Game:
                     json_dump(settings.SAVE_PATH, self.level.save)
                     pygame.quit()
                     sys.exit()
+
+            if self.level.save["last_level"] == 4:
+                self.screen.fill('black')
+                text = font.render("Congrats! You beat the game!", True, 'White')
+                self.screen.blit(text, (0, 0))
+                pygame.display.update()
+                self.clock.tick(settings.FPS)
+                continue
 
             self.screen.fill('black')
             self.level.run()

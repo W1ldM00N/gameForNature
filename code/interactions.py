@@ -65,7 +65,9 @@ class InteractGroup(pygame.sprite.Group):
                     elif sprite.type == "Trollius asiaticus" or \
                             sprite.type == "Rhodiola rosea" or \
                             sprite.type == "apple" or \
-                            sprite.type == "flower":
+                            sprite.type == "flower" or \
+                            sprite.type == 'asdf' or \
+                            sprite.type == 'qwert6':
                         if not taskStuffInteracted[sprite.type]:
                             taskStuffInteracted[sprite.type] = True
 
@@ -97,6 +99,9 @@ class InteractGroup(pygame.sprite.Group):
                             level.tasks.complete()
                         if taskStuffInteracted["apple"] and \
                                 taskStuffInteracted["flower"]:
+                            level.tasks.complete()
+                        if taskStuffInteracted["asdf"] and \
+                                taskStuffInteracted["qwert6"]:
                             level.tasks.complete()
 
                     elif sprite.type == "water":
