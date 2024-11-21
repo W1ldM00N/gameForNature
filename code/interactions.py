@@ -32,7 +32,7 @@ taskStuffInteracted = {
     'qwert6': False
 }
 
-fireCount = 5 - 4
+fireCount = 5
 
 
 class InteractGroup(pygame.sprite.Group):
