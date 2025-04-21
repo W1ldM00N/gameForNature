@@ -84,6 +84,7 @@ def mountain_builder(csvs, obstacles, interactable):
                         Tile((x, y), obstacles, 'object')
                     if csv_type == 'tree':
                         Tile((x, y), obstacles, 'object')
+                    # red book plants
                     if csv_type == 'red_book':
                         Tile((x, y), obstacles, 'object')
                         Tile((x, y), interactable, 'flower')
